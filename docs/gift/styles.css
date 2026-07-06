@@ -275,6 +275,9 @@ footer {
   font-size: 11px;
 }
 footer p { margin: 0; }
+footer nav { display: flex; gap: 16px; }
+footer a { color: inherit; text-decoration: none; }
+footer a:hover { color: var(--ink); text-decoration: underline; }
 .toast {
   position: fixed;
   left: 50%;
@@ -325,7 +328,8 @@ footer p { margin: 0; }
   .gift-type { padding: 15px 0; }
   .result-actions { flex-direction: column; }
   .result-actions button { width: 100%; }
-  footer { flex-direction: column; gap: 5px; }
+  footer { flex-direction: column; gap: 8px; }
+  footer nav { flex-wrap: wrap; gap: 8px 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
