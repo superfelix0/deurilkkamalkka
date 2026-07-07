@@ -44,7 +44,7 @@ h1 em { color: var(--green); font-style: normal; }
 .tool-card { position: relative; min-height: 310px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; border: 1px solid var(--line); padding: 34px; color: var(--ink); text-decoration: none; background: rgba(255,255,255,.55); transition: transform .25s, box-shadow .25s; }
 a.tool-card:hover { transform: translateY(-5px); box-shadow: 0 24px 55px rgba(31,43,37,.1); }
 .tool-number { position: absolute; top: 26px; left: 30px; color: var(--muted); font-size: 10px; }
-.tool-icon { position: absolute; top: 25px; right: 30px; color: rgba(46,92,75,.17); font-family: "Gowun Dodum", serif; font-size: 76px; }
+.tool-icon { position: absolute; top: 30px; right: 30px; color: rgba(46,92,75,.22); font-family: "Noto Sans KR", sans-serif; font-size: 15px; font-weight: 800; letter-spacing: .14em; }
 .tool-category { margin: 0 0 9px; color: var(--coral); font-size: 10px; font-weight: 700; letter-spacing: .12em; }
 .tool-card h3 { margin: 0 0 12px; font-family: "Gowun Dodum", serif; font-size: 34px; font-weight: 400; }
 .tool-card div > p:last-child { max-width: 360px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
@@ -56,12 +56,11 @@ a.tool-card:hover { transform: translateY(-5px); box-shadow: 0 24px 55px rgba(31
 .revisit-card .tool-category { color: #6f5d8a; }
 .compare-card { background: #e5efec; }
 .compare-card .tool-category { color: #397466; }
-.soon-card:not(.random-card) { background: #f4ecd9; }
-.soon-card:not(.random-card) .tool-category { color: #8a681f; }
+.weekend-card { background: #f4ecd9; }
+.weekend-card .tool-category { color: #8a681f; }
 .random-card { background: #eee9f3; }
 .random-card .tool-category { color: #6f5d8a; }
 .card-arrow { position: absolute; right: 30px; bottom: 30px; font-size: 22px; }
-.soon-card { opacity: .68; }
 .soon-label { position: absolute; right: 28px; bottom: 29px; border: 1px solid var(--line); border-radius: 999px; padding: 7px 11px; font-size: 9px; }
 .principle { margin: 0 3% 110px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 70px 4%; text-align: center; }
 .principle > p { color: var(--coral); font-size: 10px; font-weight: 700; letter-spacing: .15em; }
