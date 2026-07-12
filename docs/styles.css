@@ -31,8 +31,7 @@ body {
   font-family: "Noto Sans KR", system-ui, sans-serif;
 }
 
-button,
-input {
+button {
   font: inherit;
 }
 
@@ -170,18 +169,55 @@ h1 em {
   margin-bottom: 24px;
 }
 
+.refresh-button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 12px 18px;
+  color: #07111f;
+  background: var(--gold);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.refresh-button:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
 .section-title h2,
 .guide h2 {
   font-size: clamp(30px, 4vw, 48px);
 }
 
-.input-grid {
+.status {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 13px;
+}
+
+.status[data-state="ok"] {
+  color: #a7f1c9;
+  border-color: rgba(86, 217, 155, 0.36);
+}
+
+.status[data-state="error"] {
+  color: #ffc5c5;
+  border-color: rgba(255, 123, 123, 0.46);
+}
+
+.quote-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 14px;
 }
 
-label {
+.quote-grid article {
+  min-height: 150px;
   display: block;
   border: 1px solid var(--line);
   border-radius: 20px;
@@ -189,39 +225,25 @@ label {
   background: var(--panel-2);
 }
 
-label span {
+.quote-grid span {
   display: block;
   font-weight: 800;
 }
 
-label small {
+.quote-grid small {
   display: block;
-  margin: 6px 0 14px;
+  margin-top: 14px;
   color: var(--muted);
   font-size: 12px;
+  line-height: 1.55;
 }
 
-.field {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-input {
-  width: 100%;
-  min-width: 0;
-  border: 0;
-  border-bottom: 1px solid #3c5578;
-  padding: 9px 0;
+.quote-grid strong {
+  display: block;
+  margin-top: 28px;
   color: var(--ink);
-  background: transparent;
-  font: 800 24px "DM Sans", sans-serif;
-  outline: none;
-}
-
-.field b {
-  color: var(--muted);
-  font-size: 13px;
+  font: 800 clamp(25px, 3vw, 36px) "DM Sans", sans-serif;
+  letter-spacing: -0.05em;
 }
 
 .result-panel {
@@ -317,15 +339,19 @@ footer p {
 }
 
 @media (max-width: 900px) {
-  .input-grid,
+  .quote-grid,
   .result-panel,
   .guide {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .hero {
     min-height: auto;
     padding-top: 52px;
+  }
+
+  .guide {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -340,6 +366,16 @@ footer p {
     align-items: flex-start;
     flex-direction: column;
     padding: 18px 0;
+  }
+
+  .section-title {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .quote-grid,
+  .result-panel {
+    grid-template-columns: 1fr;
   }
 
   .market-note {

@@ -6,15 +6,15 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-GD6K8FB589');
+    gtag("js", new Date());
+    gtag("config", "G-GD6K8FB589");
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="index, follow">
-  <meta name="description" content="SK하이닉스 ADR과 코스피 000660 가격을 원화 기준으로 환산해 프리미엄과 할인율을 비교하는 계산기입니다.">
+  <meta name="description" content="SK하이닉스 ADR과 코스피 000660 가격을 실시간 시세로 불러와 원화 기준 괴리율을 비교하는 계산기입니다.">
   <meta name="theme-color" content="#07111f">
-  <meta property="og:title" content="SK하이닉스 ADR vs 코스피 가격 비교">
-  <meta property="og:description" content="ADR 가격, 환율, ADR 비율, 코스피 가격을 입력해 원화 기준 괴리율을 계산하세요.">
+  <meta property="og:title" content="SK하이닉스 ADR vs 코스피 실시간 가격 비교">
+  <meta property="og:description" content="SKHY 또는 SKHYV, 000660.KS, USD/KRW 시세를 자동으로 가져와 ADR 환산가와 괴리율을 계산합니다.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://giftornot.pages.dev/">
   <meta property="og:image" content="https://giftornot.pages.dev/favicon.svg">
@@ -24,16 +24,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <title>SK하이닉스 ADR vs 코스피 가격 비교</title>
+  <title>SK하이닉스 ADR vs 코스피 실시간 가격 비교</title>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "SK하이닉스 ADR vs 코스피 가격 비교",
+    "name": "SK하이닉스 ADR vs 코스피 실시간 가격 비교",
     "url": "https://giftornot.pages.dev/",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Any",
-    "description": "SK하이닉스 ADR 가격을 원화로 환산해 코스피 000660 가격과 비교하는 무료 계산기입니다.",
+    "description": "SK하이닉스 ADR 가격을 실시간 시세로 원화 환산해 코스피 000660 가격과 비교하는 무료 계산기입니다.",
     "inLanguage": "ko-KR",
     "isAccessibleForFree": true
   }
@@ -46,85 +46,75 @@
       <strong>Hynix Pair Check</strong>
     </a>
     <nav aria-label="외부 시세 링크">
-      <a href="https://finance.yahoo.com/quote/SKHY" target="_blank" rel="noopener">SKHY</a>
-      <a href="https://finance.naver.com/item/main.naver?code=000660" target="_blank" rel="noopener">000660</a>
-      <a href="https://finance.naver.com/marketindex/exchangeDetail.naver?marketindexCd=FX_USDKRW" target="_blank" rel="noopener">USD/KRW</a>
+      <a href="https://finance.yahoo.com/quote/SKHYV" target="_blank" rel="noopener">SKHY/SKHYV</a>
+      <a href="https://finance.yahoo.com/quote/000660.KS" target="_blank" rel="noopener">000660.KS</a>
+      <a href="https://finance.yahoo.com/quote/KRW=X" target="_blank" rel="noopener">USD/KRW</a>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <p class="eyebrow">ADR / KOSPI PRICE GAP CALCULATOR</p>
-      <h1>SK하이닉스 ADR,<br><em>코스피보다 비싼가?</em></h1>
+      <p class="eyebrow">LIVE ADR / KOSPI PRICE GAP</p>
+      <h1>SK하이닉스 ADR,<br><em>본주 대비 비싼가?</em></h1>
       <p class="hero-copy">
-        미국 ADR 가격을 원화로 바꾼 뒤 코스피 000660 가격과 비교합니다.
-        실시간 투자 판단이 아니라, 직접 확인한 시세를 빠르게 같은 단위로 맞춰보는 계산기입니다.
+        SKHY 또는 임시 티커 SKHYV ADR, 코스피 000660, USD/KRW 환율을 자동으로 불러와 같은 원화 기준으로 비교합니다.
+        ADR 1주는 본주 0.1주로 계산합니다.
       </p>
       <div class="market-note" role="note">
-        <b>확인 포인트</b>
-        <span>ADR 티커는 미국 상장 초기 임시 티커가 쓰일 수 있습니다. 입력 전 현재 거래 티커와 ADR 1주가 보통주 몇 주를 대표하는지 반드시 확인하세요.</span>
+        <b>계산 기준</b>
+        <span>ADR 환산 본주가 = ADR 가격 × 환율 ÷ 0.1. 즉 ADR 1주가 본주 1/10을 대표하므로, 본주 1주 기준 가격은 ADR 원화가의 10배로 환산합니다.</span>
       </div>
     </section>
 
     <section class="calculator" aria-labelledby="calc-title">
       <div class="section-title">
-        <p class="eyebrow">INPUT</p>
-        <h2 id="calc-title">가격 입력</h2>
+        <div>
+          <p class="eyebrow">LIVE DATA</p>
+          <h2 id="calc-title">실시간 비교</h2>
+        </div>
+        <button id="refreshButton" class="refresh-button" type="button">새로고침</button>
       </div>
 
-      <form id="compareForm" class="input-grid">
-        <label>
-          <span>ADR 가격</span>
-          <small>미국 시장 가격, USD</small>
-          <div class="field">
-            <input id="adrPrice" name="adrPrice" type="number" min="0" step="0.01" value="170" inputmode="decimal">
-            <b>$</b>
-          </div>
-        </label>
+      <div id="status" class="status" role="status" aria-live="polite">시세를 불러오는 중입니다…</div>
 
-        <label>
-          <span>USD/KRW 환율</span>
-          <small>1달러당 원화</small>
-          <div class="field">
-            <input id="fxRate" name="fxRate" type="number" min="0" step="0.01" value="1380" inputmode="decimal">
-            <b>원</b>
-          </div>
-        </label>
-
-        <label>
-          <span>ADR당 보통주 수</span>
-          <small>예: ADR 1주 = 보통주 1주면 1</small>
-          <div class="field">
-            <input id="shareRatio" name="shareRatio" type="number" min="0.0001" step="0.0001" value="1" inputmode="decimal">
-            <b>주</b>
-          </div>
-        </label>
-
-        <label>
-          <span>코스피 000660 가격</span>
-          <small>한국 시장 가격, KRW</small>
-          <div class="field">
-            <input id="kospiPrice" name="kospiPrice" type="number" min="0" step="1" value="2186000" inputmode="numeric">
-            <b>원</b>
-          </div>
-        </label>
-      </form>
+      <div class="quote-grid">
+        <article>
+          <span id="adrSymbolLabel">SKHY ADR</span>
+          <strong id="adrPrice">-</strong>
+          <small id="adrTime">Nasdaq · USD</small>
+        </article>
+        <article>
+          <span>코스피 000660</span>
+          <strong id="kospiPrice">-</strong>
+          <small id="kospiTime">KSE · KRW</small>
+        </article>
+        <article>
+          <span>USD/KRW</span>
+          <strong id="fxRate">-</strong>
+          <small id="fxTime">환율</small>
+        </article>
+        <article>
+          <span>ADR 비율</span>
+          <strong>0.1주</strong>
+          <small>ADR 1주 = 본주 1/10주</small>
+        </article>
+      </div>
 
       <div class="result-panel" aria-live="polite">
         <article>
-          <span>ADR 환산가</span>
+          <span>ADR 환산 본주가</span>
           <strong id="convertedPrice">-</strong>
-          <small>ADR 가격 × 환율 ÷ ADR당 보통주 수</small>
+          <small>ADR 가격 × 환율 ÷ 0.1</small>
         </article>
         <article>
           <span>괴리율</span>
           <strong id="premiumRate">-</strong>
-          <small id="premiumLabel">입력값을 기준으로 계산합니다.</small>
+          <small id="premiumLabel">시세를 불러오면 자동 계산됩니다.</small>
         </article>
         <article>
-          <span>1 ADR 기준 차이</span>
+          <span>본주 1주 기준 차이</span>
           <strong id="priceGap">-</strong>
-          <small>환산 ADR 가격 - 코스피 가격</small>
+          <small>ADR 환산 본주가 - 코스피 가격</small>
         </article>
       </div>
     </section>
@@ -137,15 +127,15 @@
       <ol>
         <li>
           <b>괴리율이 플러스면</b>
-          ADR 환산가가 코스피 가격보다 높다는 뜻입니다.
+          ADR 환산 본주가가 코스피 본주 가격보다 높다는 뜻입니다.
         </li>
         <li>
           <b>괴리율이 마이너스면</b>
-          ADR 환산가가 코스피 가격보다 낮다는 뜻입니다.
+          ADR 환산 본주가가 코스피 본주 가격보다 낮다는 뜻입니다.
         </li>
         <li>
           <b>실제 거래 전에는</b>
-          세금, 환전 스프레드, 거래 수수료, 시차, 유동성, ADR 비율을 따로 확인해야 합니다.
+          시세 지연, 환전 스프레드, 세금, 거래 수수료, 유동성, 장 운영 시간 차이를 함께 봐야 합니다.
         </li>
       </ol>
     </section>
@@ -156,7 +146,7 @@
       <strong>SK Hynix Pair Check</strong>
       <p>교육·참고용 계산기입니다. 투자 권유가 아닙니다.</p>
     </div>
-    <p>사용자가 입력한 값만 브라우저에서 계산하며 별도 서버에 저장하지 않습니다.</p>
+    <p>시세 데이터는 Yahoo Finance 공개 chart 응답을 기준으로 브라우저에서 직접 불러옵니다. 데이터 지연 또는 일시 오류가 있을 수 있습니다.</p>
     <span>© 2026</span>
   </footer>
 
