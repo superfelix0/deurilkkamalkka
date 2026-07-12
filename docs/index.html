@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -9,156 +9,157 @@
     gtag('js', new Date());
     gtag('config', 'G-GD6K8FB589');
   </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://giftornot.pages.dev/">
-  <meta property="og:url" content="https://giftornot.pages.dev/">
+  <meta name="description" content="SK하이닉스 ADR과 코스피 000660 가격을 원화 기준으로 환산해 프리미엄과 할인율을 비교하는 계산기입니다.">
+  <meta name="theme-color" content="#07111f">
+  <meta property="og:title" content="SK하이닉스 ADR vs 코스피 가격 비교">
+  <meta property="og:description" content="ADR 가격, 환율, ADR 비율, 코스피 가격을 입력해 원화 기준 괴리율을 계산하세요.">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="할까말까">
-  <meta property="og:locale" content="ko_KR">
-  <meta name="description" content="선물, 구매, 소비 회고, 두 선택지 비교, 주말 계획과 랜덤 선택까지 생활 속 결정을 가볍게 풀어주는 무료 도구 모음.">
-  <meta property="og:title" content="할까말까 — 생활 결정 연구소">
-  <meta property="og:description" content="선물, 구매, 소비 회고, A/B 비교. 고민은 짧게, 결정은 가볍게.">
-  <title>할까말까 — 생활 결정 연구소</title>
-  <meta name="theme-color" content="#fbf9f3">
+  <meta property="og:url" content="https://giftornot.pages.dev/">
+  <meta property="og:image" content="https://giftornot.pages.dev/favicon.svg">
+  <link rel="canonical" href="https://giftornot.pages.dev/">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <title>SK하이닉스 ADR vs 코스피 가격 비교</title>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "할까말까",
-    "alternateName": "생활 결정 연구소",
+    "@type": "WebApplication",
+    "name": "SK하이닉스 ADR vs 코스피 가격 비교",
     "url": "https://giftornot.pages.dev/",
-    "description": "선물, 구매, 소비 회고, 두 선택지 비교처럼 일상에서 마주치는 작은 결정을 돕는 무료 도구 모음입니다.",
-    "inLanguage": "ko-KR"
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "description": "SK하이닉스 ADR 가격을 원화로 환산해 코스피 000660 가격과 비교하는 무료 계산기입니다.",
+    "inLanguage": "ko-KR",
+    "isAccessibleForFree": true
   }
   </script>
 </head>
 <body>
-  <div class="grain"></div>
   <header class="site-header">
-    <a class="brand" href="./"><span class="brand-dot">?</span><span>할까말까</span></a>
-    <p>OR NOT LAB · beta</p>
+    <a class="brand" href="./" aria-label="홈으로 이동">
+      <span>SK</span>
+      <strong>Hynix Pair Check</strong>
+    </a>
+    <nav aria-label="외부 시세 링크">
+      <a href="https://finance.yahoo.com/quote/SKHY" target="_blank" rel="noopener">SKHY</a>
+      <a href="https://finance.naver.com/item/main.naver?code=000660" target="_blank" rel="noopener">000660</a>
+      <a href="https://finance.naver.com/marketindex/exchangeDetail.naver?marketindexCd=FX_USDKRW" target="_blank" rel="noopener">USD/KRW</a>
+    </nav>
   </header>
 
   <main>
     <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">SMALL DECISIONS, LIGHTER DAYS</p>
-        <h1>고민은 짧게,<br><em>결정은 가볍게.</em></h1>
-        <p class="hero-description">사소해 보여도 은근히 마음 쓰이는 생활 속 선택들.<br>몇 가지 질문에 답하면 생각을 정리해드려요.</p>
-        <a class="hero-link" href="#tools">오늘의 고민 고르기 <span>↓</span></a>
-      </div>
-      <div class="decision-orbit" aria-hidden="true">
-        <div class="orbit orbit-one"></div>
-        <div class="orbit orbit-two"></div>
-        <span class="orbit-word word-one">할까</span>
-        <span class="orbit-word word-two">말까</span>
-        <span class="orbit-center">?</span>
-        <span class="orbit-note">마음과 현실<br>그 사이 어딘가</span>
+      <p class="eyebrow">ADR / KOSPI PRICE GAP CALCULATOR</p>
+      <h1>SK하이닉스 ADR,<br><em>코스피보다 비싼가?</em></h1>
+      <p class="hero-copy">
+        미국 ADR 가격을 원화로 바꾼 뒤 코스피 000660 가격과 비교합니다.
+        실시간 투자 판단이 아니라, 직접 확인한 시세를 빠르게 같은 단위로 맞춰보는 계산기입니다.
+      </p>
+      <div class="market-note" role="note">
+        <b>확인 포인트</b>
+        <span>ADR 티커는 미국 상장 초기 임시 티커가 쓰일 수 있습니다. 입력 전 현재 거래 티커와 ADR 1주가 보통주 몇 주를 대표하는지 반드시 확인하세요.</span>
       </div>
     </section>
 
-    <section id="tools" class="tools-section">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">TODAY'S TOOLS</p>
-          <h2>오늘은 어떤 고민인가요?</h2>
-        </div>
-        <p>도구는 계속 자라납니다.<br>전부 무료로 이용할 수 있어요.</p>
+    <section class="calculator" aria-labelledby="calc-title">
+      <div class="section-title">
+        <p class="eyebrow">INPUT</p>
+        <h2 id="calc-title">가격 입력</h2>
       </div>
 
-      <div class="tool-grid">
-        <a class="tool-card gift-card" href="gift/">
-          <span class="tool-number">01</span>
-          <span class="tool-icon">GIFT</span>
-          <div>
-            <p class="tool-category">관계 · 선물</p>
-            <h3>드릴까말까</h3>
-            <p>선물을 해야 할지부터 적당한 금액과 종류까지 함께 판단해요.</p>
+      <form id="compareForm" class="input-grid">
+        <label>
+          <span>ADR 가격</span>
+          <small>미국 시장 가격, USD</small>
+          <div class="field">
+            <input id="adrPrice" name="adrPrice" type="number" min="0" step="0.01" value="170" inputmode="decimal">
+            <b>$</b>
           </div>
-          <span class="card-arrow">↗</span>
-        </a>
+        </label>
 
-        <a class="tool-card buy-card" href="buy/">
-          <span class="tool-number">02</span>
-          <span class="tool-icon">BUY</span>
-          <div>
-            <p class="tool-category">소비 · 선택</p>
-            <h3>살까말까</h3>
-            <p>필요와 욕심 사이, 지금 사도 괜찮은 물건인지 차분히 따져봐요.</p>
+        <label>
+          <span>USD/KRW 환율</span>
+          <small>1달러당 원화</small>
+          <div class="field">
+            <input id="fxRate" name="fxRate" type="number" min="0" step="0.01" value="1380" inputmode="decimal">
+            <b>원</b>
           </div>
-          <span class="card-arrow">↗</span>
-        </a>
+        </label>
 
-        <a class="tool-card revisit-card" href="revisit/">
-          <span class="tool-number">03</span>
-          <span class="tool-icon">REVIEW</span>
-          <div>
-            <p class="tool-category">소비 · 회고</p>
-            <h3>다시만난소비</h3>
-            <p>시간이 지난 물건을 다시 만나, 다음 소비를 위한 기준을 발견해요.</p>
+        <label>
+          <span>ADR당 보통주 수</span>
+          <small>예: ADR 1주 = 보통주 1주면 1</small>
+          <div class="field">
+            <input id="shareRatio" name="shareRatio" type="number" min="0.0001" step="0.0001" value="1" inputmode="decimal">
+            <b>주</b>
           </div>
-          <span class="card-arrow">↗</span>
-        </a>
+        </label>
 
-        <a class="tool-card compare-card" href="compare/">
-          <span class="tool-number">04</span>
-          <span class="tool-icon">A / B</span>
-          <div>
-            <p class="tool-category">선택 · 비교</p>
-            <h3>둘 중 뭐?</h3>
-            <p>A와 B 사이에서 중요한 기준을 하나씩 비교해 마음을 정리해요.</p>
+        <label>
+          <span>코스피 000660 가격</span>
+          <small>한국 시장 가격, KRW</small>
+          <div class="field">
+            <input id="kospiPrice" name="kospiPrice" type="number" min="0" step="1" value="2186000" inputmode="numeric">
+            <b>원</b>
           </div>
-          <span class="card-arrow">↗</span>
-        </a>
+        </label>
+      </form>
 
-        <a class="tool-card weekend-card" href="weekend/">
-          <span class="tool-number">05</span>
-          <span class="tool-icon">WEEKEND</span>
-          <div>
-            <p class="tool-category">생활 · 주말</p>
-            <h3>이번 주말 뭐하지</h3>
-            <p>시간과 예산, 기분에 맞는 작은 계획을 골라드려요.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
-
-        <a class="tool-card random-card" href="random/">
-          <span class="tool-number">06</span>
-          <span class="tool-icon">PICK</span>
-          <div>
-            <p class="tool-category">재미 · 랜덤</p>
-            <h3>그냥 대신 정해줘</h3>
-            <p>더 생각하기 싫은 순간, 가볍게 하나를 뽑아드려요.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+      <div class="result-panel" aria-live="polite">
+        <article>
+          <span>ADR 환산가</span>
+          <strong id="convertedPrice">-</strong>
+          <small>ADR 가격 × 환율 ÷ ADR당 보통주 수</small>
+        </article>
+        <article>
+          <span>괴리율</span>
+          <strong id="premiumRate">-</strong>
+          <small id="premiumLabel">입력값을 기준으로 계산합니다.</small>
+        </article>
+        <article>
+          <span>1 ADR 기준 차이</span>
+          <strong id="priceGap">-</strong>
+          <small>환산 ADR 가격 - 코스피 가격</small>
+        </article>
       </div>
     </section>
 
-    <section class="principle">
-      <p>우리의 원칙</p>
-      <blockquote>정답을 강요하지 않아요.<br>마음속에 있던 답을 <em>조금 더 잘 보이게</em> 할 뿐이에요.</blockquote>
+    <section class="guide" aria-labelledby="guide-title">
+      <div>
+        <p class="eyebrow">HOW TO READ</p>
+        <h2 id="guide-title">해석은 이렇게</h2>
+      </div>
+      <ol>
+        <li>
+          <b>괴리율이 플러스면</b>
+          ADR 환산가가 코스피 가격보다 높다는 뜻입니다.
+        </li>
+        <li>
+          <b>괴리율이 마이너스면</b>
+          ADR 환산가가 코스피 가격보다 낮다는 뜻입니다.
+        </li>
+        <li>
+          <b>실제 거래 전에는</b>
+          세금, 환전 스프레드, 거래 수수료, 시차, 유동성, ADR 비율을 따로 확인해야 합니다.
+        </li>
+      </ol>
     </section>
   </main>
 
   <footer>
-    <span>OR NOT LAB</span>
-    <p>생활 속 작은 결정을 연구합니다.</p>
-    <nav aria-label="도구 바로가기">
-      <a href="gift/">선물 고민</a>
-      <a href="buy/">구매 고민</a>
-      <a href="revisit/">소비 회고</a>
-      <a href="compare/">두 선택지 비교</a>
-      <a href="weekend/">주말 계획</a>
-      <a href="random/">대신 정하기</a>
-    </nav>
+    <div>
+      <strong>SK Hynix Pair Check</strong>
+      <p>교육·참고용 계산기입니다. 투자 권유가 아닙니다.</p>
+    </div>
+    <p>사용자가 입력한 값만 브라우저에서 계산하며 별도 서버에 저장하지 않습니다.</p>
     <span>© 2026</span>
   </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
