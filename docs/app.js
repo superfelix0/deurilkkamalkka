@@ -1,11 +1,3 @@
-const ADR_SHARE_RATIO = 0.1;
-
-const symbols = {
-  adrCandidates: ["SKHY", "SKHYV"],
-  kospi: "000660.KS",
-  fx: "KRW=X",
-};
-
 const output = {
   status: document.querySelector("#status"),
   refreshButton: document.querySelector("#refreshButton"),
@@ -50,90 +42,37 @@ const dateTime = new Intl.DateTimeFormat("ko-KR", {
   timeStyle: "short",
 });
 
-function yahooChartUrl(symbol) {
-  return `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=1m&range=1d`;
-}
+async function fetchQuotes() {
+  const response = await fetch("/api/quotes", { cache: "no-store" });
+  const data = await response.json().catch(() => null);
 
-function proxiedUrl(url) {
-  return `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-}
-
-async function fetchJson(url) {
-  const response = await fetch(url, { cache: "no-store" });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`);
+  if (!response.ok || !data?.ok) {
+    throw new Error(data?.message || `시세 API 오류: HTTP ${response.status}`);
   }
 
-  return response.json();
-}
-
-async function fetchWithFallback(symbol) {
-  const directUrl = yahooChartUrl(symbol);
-
-  try {
-    return await fetchJson(directUrl);
-  } catch (directError) {
-    try {
-      return await fetchJson(proxiedUrl(directUrl));
-    } catch (proxyError) {
-      throw new Error(`${symbol} 시세를 불러오지 못했습니다.`);
-    }
-  }
-}
-
-async function fetchFirstValidQuote(symbolList) {
-  const errors = [];
-
-  for (const symbol of symbolList) {
-    try {
-      const data = await fetchWithFallback(symbol);
-      return parseQuote(symbol, data);
-    } catch (error) {
-      errors.push(error.message);
-    }
-  }
-
-  throw new Error(errors.at(-1) || "ADR 시세를 불러오지 못했습니다.");
-}
-
-function parseQuote(symbol, data) {
-  const result = data?.chart?.result?.[0];
-  const meta = result?.meta;
-  const price = meta?.regularMarketPrice ?? meta?.previousClose;
-
-  if (!meta || !Number.isFinite(price)) {
-    throw new Error(`${symbol} 시세 형식이 올바르지 않습니다.`);
-  }
-
-  return {
-    symbol,
-    price,
-    currency: meta.currency,
-    exchange: meta.fullExchangeName || meta.exchangeName || "",
-    marketTime: meta.regularMarketTime ? new Date(meta.regularMarketTime * 1000) : null,
-  };
+  return data;
 }
 
 function renderQuote(quote, valueEl, timeEl, formatter, suffix = "") {
   valueEl.textContent = `${formatter.format(quote.price)}${suffix}`;
-  const time = quote.marketTime ? dateTime.format(quote.marketTime) : "시간 정보 없음";
+  const time = quote.marketTime ? dateTime.format(new Date(quote.marketTime)) : "시간 정보 없음";
   timeEl.textContent = `${quote.exchange} · ${time}`;
 }
 
-function renderResult({ adr, kospi, fx }) {
-  const converted = (adr.price * fx.price) / ADR_SHARE_RATIO;
-  const gap = converted - kospi.price;
-  const premium = gap / kospi.price;
+function renderResult({ adr, kospi, fx }, result) {
+  output.adrSymbolLabel.textContent = `${adr.symbol} ADR`;
+  renderQuote(adr, output.adrPrice, output.adrTime, usd);
+  renderQuote(kospi, output.kospiPrice, output.kospiTime, won);
+  renderQuote(fx, output.fxRate, output.fxTime, number, "원");
 
-  output.convertedPrice.textContent = won.format(converted);
-  output.priceGap.textContent = won.format(gap);
-  output.premiumRate.textContent = percent.format(premium);
+  output.convertedPrice.textContent = won.format(result.converted);
+  output.priceGap.textContent = won.format(result.gap);
+  output.premiumRate.textContent = percent.format(result.premium);
 
-  if (premium > 0.0025) {
+  if (result.premium > 0.0025) {
     output.premiumRate.dataset.state = "premium";
     output.premiumLabel.textContent = "ADR 환산 본주가가 코스피보다 높습니다.";
-  } else if (premium < -0.0025) {
+  } else if (result.premium < -0.0025) {
     output.premiumRate.dataset.state = "discount";
     output.premiumLabel.textContent = "ADR 환산 본주가가 코스피보다 낮습니다.";
   } else {
@@ -157,21 +96,8 @@ async function refreshQuotes() {
   setStatus("시세를 불러오는 중입니다…");
 
   try {
-    const [adr, kospiData, fxData] = await Promise.all([
-      fetchFirstValidQuote(symbols.adrCandidates),
-      fetchWithFallback(symbols.kospi),
-      fetchWithFallback(symbols.fx),
-    ]);
-
-    const kospi = parseQuote(symbols.kospi, kospiData);
-    const fx = parseQuote(symbols.fx, fxData);
-
-    output.adrSymbolLabel.textContent = `${adr.symbol} ADR`;
-    renderQuote(adr, output.adrPrice, output.adrTime, usd);
-    renderQuote(kospi, output.kospiPrice, output.kospiTime, won);
-    renderQuote(fx, output.fxRate, output.fxTime, number, "원");
-    renderResult({ adr, kospi, fx });
-
+    const data = await fetchQuotes();
+    renderResult(data.quotes, data.result);
     setStatus("시세 반영 완료. 데이터는 거래소·제공사 기준으로 지연될 수 있습니다.", "ok");
   } catch (error) {
     setStatus(`${error.message} 잠시 후 다시 새로고침해 주세요.`, "error");
